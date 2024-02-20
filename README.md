@@ -5,7 +5,7 @@ Welcome to the Python Core Repository! This repository serves as a hub for refre
 ## Table of Contents
 
 1. [Introduction](#introduction)
-2. [Python Basics Refresh](#python-basics-refresh)
+2. [Python Basics](#python-basics)
 3. [Data Science](#data-science)
 4. [Machine Learning](#machine-learning)
 5. [AI Development](#ai-development)
@@ -21,7 +21,7 @@ This repository aims to provide a comprehensive platform for refreshing our Pyth
 
 ## Python Basics
 
-If you need a quick refresher on Python basics, head over to the [Python Basics Refresh](python-basics/) directory. Here, you'll find resources and exercises to reinforce your understanding of fundamental Python concepts.
+If you need a quick refresher on Python basics, head over to the [Python Basics](python-basics/) directory. Here, you'll find resources and exercises to reinforce your understanding of fundamental Python concepts.
 
 ## Data Science
 
