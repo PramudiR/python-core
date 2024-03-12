@@ -1,10 +1,11 @@
 # Automate tasks with Python
-from os import path, scandir, makedirs
+from os import scandir, makedirs
+from os.path import isdir, splitext, join
 from shutil import move
 
-
+# Identify fie types
 def fileIdentifier(filepath):
-    extension = path.splitext(filepath)[1]
+    extension = splitext(filepath)[1]
     
     # supported image types
     image_extensions = [".jpg", ".jpeg", ".jif", ".png", ".gif", ".webp", ".tiff", ".tif", ".psd", 
@@ -29,16 +30,39 @@ def fileIdentifier(filepath):
 
     return extension_categories.get(extension.lower(), 'other')
 
-
+# Sort files in a given directory
 def sortFiles(dirPath: str):
-    if not path.isdir(dirPath):
+    if not isdir(dirPath):
         return(f"{dirPath} does not exists")
     
     for entry in scandir(dirPath):
         if entry.is_file():
             category = fileIdentifier(entry.name)
-            subdir = path.join(dirPath, category)
+            subdir = join(dirPath, category)
             makedirs(subdir, exist_ok=True)
-            move(entry.path, path.join(subdir, entry.name))
+            move(entry.path, join(subdir, entry.name))
         
     return(f"{dirPath} scanned successfully")
+
+# Get the list of given file type from a directory 
+def listFiles(dirPath: str, fileType: str):
+    if not isdir(dirPath):
+        return(f"{dirPath} does not exists")
+    
+    files = [entry for entry in scandir(dirPath) if entry.is_file() & (splitext(entry.name)[1] == fileType)]
+    
+    return files
+
+'''
+A DirEntry object in Python's os module represents an entry in a directory, 
+and it provides several properties that you can use to access information about the entry. 
+Some of the commonly used properties include:
+
+name: The name of the entry (file or directory).
+path: The full path to the entry.
+is_dir(): Method that returns True if the entry is a directory.
+is_file(): Method that returns True if the entry is a regular file.
+is_symlink(): Method that returns True if the entry is a symbolic link.
+stat(): Method that returns an os.stat_result object with information about the entry, such as size, permissions, and timestamps.
+
+'''
