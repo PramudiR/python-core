@@ -2,6 +2,9 @@
 from os import scandir, makedirs
 from os.path import isdir, splitext, join
 from shutil import move
+import logging
+
+from data_science.time_data import seconds2Date
 
 # Identify fie types
 def fileIdentifier(filepath):
@@ -33,7 +36,8 @@ def fileIdentifier(filepath):
 # Sort files in a given directory
 def sortFiles(dirPath: str):
     if not isdir(dirPath):
-        return(f"{dirPath} does not exists")
+        logging.info(f"{dirPath} does not exists")
+        return None
     
     for entry in scandir(dirPath):
         if entry.is_file():
@@ -47,11 +51,20 @@ def sortFiles(dirPath: str):
 # Get the list of given file type from a directory 
 def listFiles(dirPath: str, fileType: str):
     if not isdir(dirPath):
-        return(f"{dirPath} does not exists")
+        logging.info(f"{dirPath} does not exists")
+        return (None, None)
     
-    files = [entry for entry in scandir(dirPath) if entry.is_file() & (splitext(entry.name)[1] == fileType)]
+    files = []
+    file_info  = {}
+
+    for entry in scandir(dirPath):
+        if entry.is_file() & (splitext(entry.name)[1] == fileType):
+            files.append(entry)
+            file_stat = entry.stat()
+            file_info[entry.name] = {"File size(MB)": (file_stat.st_size/(1024*1024)),
+                                     "Last modified": seconds2Date(file_stat.st_mtime)}
     
-    return files
+    return files, file_info
 
 '''
 A DirEntry object in Python's os module represents an entry in a directory, 
