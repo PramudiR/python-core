@@ -1,6 +1,5 @@
 # Automate tasks with Python
-from os import scandir, makedirs
-from os.path import isdir, splitext, join
+import os
 from shutil import move
 import logging
 
@@ -8,7 +7,7 @@ from data_science.time_data import seconds2Date
 
 # Identify fie types
 def fileIdentifier(filepath):
-    extension = splitext(filepath)[1]
+    extension = os.path.splitext(filepath)[1]
     
     # supported image types
     image_extensions = [".jpg", ".jpeg", ".jif", ".png", ".gif", ".webp", ".tiff", ".tif", ".psd", 
@@ -35,34 +34,36 @@ def fileIdentifier(filepath):
 
 # Sort files in a given directory
 def sortFiles(dirPath: str):
-    if not isdir(dirPath):
+    if not os.path.isdir(dirPath):
         logging.info(f"{dirPath} does not exists")
         return None
     
-    for entry in scandir(dirPath):
+    for entry in os.scandir(dirPath):
         if entry.is_file():
             category = fileIdentifier(entry.name)
-            subdir = join(dirPath, category)
-            makedirs(subdir, exist_ok=True)
-            move(entry.path, join(subdir, entry.name))
+            subdir = os.path.join(dirPath, category)
+            os.makedirs(subdir, exist_ok=True)
+            move(entry.path, os.path.join(subdir, entry.name))
         
     return(f"{dirPath} scanned successfully")
 
 # Get the list of given file type from a directory 
 def listFiles(dirPath: str, fileType: str):
-    if not isdir(dirPath):
+    if not os.path.isdir(dirPath):
         logging.info(f"{dirPath} does not exists")
         return (None, None)
     
     files = []
     file_info  = {}
 
-    for entry in scandir(dirPath):
-        if entry.is_file() & (splitext(entry.name)[1] == fileType):
+    for entry in os.scandir(dirPath):
+        if entry.is_file() and (os.path.splitext(entry.name)[1] == fileType):
             files.append(entry)
             file_stat = entry.stat()
-            file_info[entry.name] = {"File size(MB)": (file_stat.st_size/(1024*1024)),
-                                     "Last modified": seconds2Date(file_stat.st_mtime)}
+            file_info[entry.name] = {
+                "File size(MB)": (file_stat.st_size/(1024*1024)),
+                "Last modified": seconds2Date(file_stat.st_mtime)
+                }
     
     return files, file_info
 
