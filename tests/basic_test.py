@@ -28,4 +28,5 @@ def test_list_files():
         }
     }
 
+    # Testing
     assert list_files(temp_dir, '.txt') == os.scandir(temp_dir), file_info
