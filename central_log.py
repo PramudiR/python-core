@@ -1,9 +1,12 @@
+'''Create a log file and command line logs at the same time'''
 import logging
 from logging import StreamHandler
 
+
 def config_log():
-    ## Configure the logging module
-    logging.basicConfig(filename='server.log', level=logging.INFO, 
+    '''configure the log generator'''
+    # Configure the logging module
+    logging.basicConfig(filename='server.log', level=logging.INFO,
                         format='%(asctime)s - %(levelname)s - %(message)s')
     log_format = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
 

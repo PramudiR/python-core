@@ -1,5 +1,5 @@
-# To test the use cases of different functions
-from python_basics.automate import listFiles
+'''To test the use cases of different functions'''
+from python_basics.automate import list_files
 
-files, file_info = listFiles(".", ".md")
+files, file_info = list_files(".", ".md")
 print(file_info)
