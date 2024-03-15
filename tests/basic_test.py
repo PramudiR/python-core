@@ -21,11 +21,11 @@ def test_list_files():
     # expected output
     file_info = {
         "file1.txt": {
-            'File size(MB)': 0,
+            'File size(MB)': 0.0,
             'Last modified': datetime.today().strftime('%d %b, %Y')
             },
         "file2.txt": {
-            'File size(MB)': 0,
+            'File size(MB)': 0.0,
             'Last modified': datetime.today().strftime('%d %b, %Y')
         }
     }
