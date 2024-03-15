@@ -32,7 +32,9 @@ def test_list_files():
 
     # Testing
     files, data = list_files(temp_dir, '.txt')
-    assert files == os.scandir(temp_dir)
+    expected_files = [entry.name for entry in os.scandir(temp_dir)]
+    actual_files = [entry.name for entry in files]
+    assert actual_files == expected_files
     assert data == file_info
 
     # Clean up temp directory and files
