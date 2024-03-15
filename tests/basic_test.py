@@ -31,7 +31,9 @@ def test_list_files():
     }
 
     # Testing
-    assert list_files(temp_dir, '.txt') == (os.scandir(temp_dir), file_info)
+    files, data = list_files(temp_dir, '.txt')
+    assert files == os.scandir(temp_dir)
+    assert data == file_info
 
     # Clean up temp directory and files
     shutil.rmtree(temp_dir)
