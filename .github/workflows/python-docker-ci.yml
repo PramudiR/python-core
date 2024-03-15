@@ -35,8 +35,8 @@ jobs:
     - name: Set up Python Environment
       env:
         PYTHONPATH: |
-          ${{ github.workspace }}/python_basics
-          ${{ github.workspace }}/data_science
+          ${{ github.workspace }}/python_basics:$
+          {{ github.workspace }}/data_science
     - name: Test with pytest
       run: |
         pytest
