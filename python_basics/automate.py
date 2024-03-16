@@ -133,3 +133,26 @@ def download_files(url: str, downloads_dir: str, file_extension: str) -> None:
             os.remove(download_path)
         else:
             logging.info("Download success: %s", url)
+
+
+def test_url(url):
+    '''Check the content type of a URL'''
+    # check the header
+    try:
+        response = requests.head(url, allow_redirects=True, timeout=5)
+
+        # check if the request was successful (status code 2xx)
+        if response.status_code // 100 == 2:
+            logging.info("URL is accessible: %s", url)
+
+            # check if the response indicates a downloadable file
+            content_type = response.headers.get('content-type', '')
+            logging.info("Content type: %s", content_type)
+
+        else:
+            logging.info("URL not accessible: %s", url)
+            logging.info("status code: %s", response.status_code)
+            return
+    except RequestException as e:
+        logging.info("URL not accessible: %e", e)
+        return
