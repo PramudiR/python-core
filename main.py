@@ -1,4 +1,11 @@
 '''To Run'''
-from python_basics.automate import list_files
+from python_basics.automate import list_files, download_files
+from central_log import config_log
 
-files, file_info = list_files("./python_basics", ".py")
+# configure logging
+config_log()
+
+TEST_URL = "https://google.com"
+
+download_files(TEST_URL, "temp", ".html")
+files, file_info = list_files("temp", ".html")

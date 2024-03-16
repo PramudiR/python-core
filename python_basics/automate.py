@@ -1,7 +1,13 @@
 ''' Automate tasks with Python '''
 import os
-from shutil import move
 import logging
+import random
+import string
+from shutil import move
+from urllib.parse import urlparse
+import requests
+from requests.exceptions import RequestException
+from tqdm import tqdm
 
 from data_science.time_data import seconds_2_date
 
@@ -76,3 +82,54 @@ def list_files(
                 }
 
     return files, file_info
+
+
+def generate_unique_name(length=10) -> str:
+    '''Generate unique names'''
+    characters = string.ascii_letters + string.digits
+    unique_name = ''.join(random.choice(characters) for _ in range(length))
+    return unique_name
+
+
+def download_files(url: str, downloads_dir: str, file_extension: str) -> None:
+    '''Download the content from a url to a given location'''
+    # validate url
+    parsed_url = urlparse(url)
+    if not (parsed_url.scheme and parsed_url.netloc):
+        logging.info("Invalid URL : %s", url)
+        return
+
+    # create downloads dir
+    os.makedirs(downloads_dir, exist_ok=True)
+
+    with requests.Session() as se:
+        chunk_size = 1024 * 1024  # 1 MB chunk size
+        response = se.get(url, stream=True)
+        total_size = int(response.headers.get('content-length', 0))
+
+        # display progress bar
+        with tqdm(total=total_size,
+                  unit='B',
+                  unit_scale=True,
+                  desc=url.split('/')[-1],
+                  ascii=True,
+                  miniters=1) as progress:
+            download_path = os.path.join(
+                downloads_dir, generate_unique_name() + file_extension
+                )
+            with open(download_path, 'wb') as f:
+                try:
+                    for chunk in response.iter_content(chunk_size=chunk_size):
+                        if chunk:
+                            f.write(chunk)
+                            progress.update(len(chunk))
+                except RequestException as e:
+                    logging.info("Download failed: %e", e)
+                    os.remove(download_path)
+                    return
+
+        if total_size != 0 and progress.n != total_size:
+            logging.info("Download failed: %s", url)
+            os.remove(download_path)
+        else:
+            logging.info("Download success: %s", url)
