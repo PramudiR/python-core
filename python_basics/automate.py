@@ -135,7 +135,7 @@ def download_files(url: str, downloads_dir: str, file_extension: str) -> None:
             logging.info("Download success: %s", url)
 
 
-def test_url(url):
+def check_url(url):
     '''Check the content type of a URL'''
     # check the header
     try:
@@ -147,7 +147,7 @@ def test_url(url):
 
             # check if the response indicates a downloadable file
             content_type = response.headers.get('content-type', '')
-            logging.info("Content type: %s", content_type)
+            return content_type
 
         else:
             logging.info("URL not accessible: %s", url)
@@ -156,3 +156,5 @@ def test_url(url):
     except RequestException as e:
         logging.info("URL not accessible: %e", e)
         return
+
+# TODO: write a function to decompress .bz2 files and .zip files
