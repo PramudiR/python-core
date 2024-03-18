@@ -3,6 +3,7 @@ import os
 import shutil
 from datetime import datetime
 import bz2
+import zipfile
 from python_basics import automate
 
 
@@ -82,6 +83,24 @@ def test_extract_bz2():
     # testing
     automate.extract_bz2(temp_file)
     with open("./temp/file.txt", 'r', encoding='utf-8') as f:
+        assert f.read() == content
+
+    # clean temp dir
+    shutil.rmtree('./temp')
+
+
+def test_extract_zip():
+    '''Test the functionality of the zip extractor'''
+    # create a dummy .zip file
+    content = "This is a test file for .zip"
+    os.makedirs('./temp', exist_ok=True)
+
+    with zipfile.ZipFile("./temp/test.zip", 'w') as z:
+        z.writestr('sample.txt', content)
+
+    # testing
+    automate.extract_zip("./temp/test.zip", "./temp")
+    with open("./temp/sample.txt", 'r', encoding='utf-8') as f:
         assert f.read() == content
 
     # clean temp dir

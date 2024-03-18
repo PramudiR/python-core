@@ -6,6 +6,7 @@ import string
 from shutil import move
 from urllib.parse import urlparse
 import bz2
+import zipfile
 import requests
 from requests.exceptions import RequestException
 from tqdm import tqdm
@@ -177,6 +178,23 @@ def extract_bz2(file_path: str) -> None:
         with open(output_path, 'wb') as f:
             f.write(data)
 
-        logging.info("Extraction success: %s", file_path)
+        logging.info("Extraction success: %s", output_path)
     except OSError as e:
-        logging.info("Extraction failed: %s", e)
+        logging.info("Extraction failed: %e", e)
+
+
+def extract_zip(file_path: str, extract_dir: str) -> None:
+    '''Extract .zip compressed files'''
+    # check if the file exists
+    if not os.path.isfile(file_path):
+        logging.info("File not exists: %s", file_path)
+        return
+
+    # extract the file
+    try:
+        with zipfile.ZipFile(file_path, 'r') as z:
+            z.extractall(extract_dir)
+
+        logging.info("Extraction success: %s", extract_dir)
+    except OSError as e:
+        logging.info("Extraction failed: %e", e)
