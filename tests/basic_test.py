@@ -2,6 +2,7 @@
 import os
 import shutil
 from datetime import datetime
+import bz2
 from python_basics import automate
 
 
@@ -43,11 +44,12 @@ def test_list_files():
 
 def test_download_files():
     '''Test the functionality of download_files function'''
-    test_url = ("https://dataverse.harvard.edu/api/access/datafile/:"
-                "persistentId?persistentId=doi:10.7910/DVN/HG7NV7/YZWKHN")
+    test_url = {"variable-descriptions.csv":
+                ("https://dataverse.harvard.edu/api/access/datafile/:"
+                 "persistentId?persistentId=doi:10.7910/DVN/HG7NV7/YZWKHN")}
     temp_dir = "./temp"
 
-    automate.download_files(test_url, temp_dir, ".csv")
+    automate.download_files(test_url, temp_dir)
 
     # testing
     downloaded_file = [entry.name for entry in os.scandir('temp')][0]
@@ -64,3 +66,23 @@ def test_check_url():
 
     content_type = automate.check_url(test_url)
     assert 'text/html' in content_type
+
+
+def test_extract_bz2():
+    '''Test the functionality of the bz2 file extractor'''
+    # create a dummy bz2 file
+    content = "This is to test extract_bz2"
+    compressed_content = bz2.compress(content.encode('utf-8'))
+    os.makedirs('./temp', exist_ok=True)
+    temp_file = "./temp/file.txt.bz2"
+
+    with open(temp_file, 'wb') as f:
+        f.write(compressed_content)
+
+    # testing
+    automate.extract_bz2(temp_file)
+    with open("./temp/file.txt", 'r', encoding='utf-8') as f:
+        assert f.read() == content
+
+    # clean temp dir
+    shutil.rmtree('./temp')

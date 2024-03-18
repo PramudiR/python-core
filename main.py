@@ -1,12 +1,12 @@
 '''To Run'''
-from python_basics.automate import list_files, download_files
+from python_basics import automate
 from central_log import config_log
 
 # configure logging
 config_log()
 
-TEST_URL = ("https://dataverse.harvard.edu/api/access/datafile/:"
-            "persistentId?persistentId=doi:10.7910/DVN/HG7NV7/YZWKHN")
-
-download_files(TEST_URL, "temp", ".csv")
-files, file_info = list_files("temp", ".csv")
+test_url = {"2008.csv.bz2":
+            ("https://dataverse.harvard.edu/api/access/datafile/:"
+             "persistentId?persistentId=doi:10.7910/DVN/HG7NV7/EIR0RA")}
+automate.download_files(test_url, "temp")
+automate.extract_bz2('temp/2008.csv.bz2')
