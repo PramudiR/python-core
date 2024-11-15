@@ -1,0 +1,100 @@
+{
+    "topic": "Vision AI",
+    "content": [
+      {
+        "Name": "Python Machine Learning",
+        "Author": "Sebastian Raschka",
+        "URL": [
+          "https://www.amazon.com/Python-Machine-Learning-scikit-learn-TensorFlow/dp/1789955750",
+          "https://github.com/rasbt/python-machine-learning-book-3rd-edition"
+        ],
+        "Summary": "Python Machine Learning provides a comprehensive guide to machine learning and deep learning with Python, scikit-learn, and TensorFlow 2.",
+        "Key Sections": {
+          "Chapter 1 - 5": "Introduction to machine learning with Python and its libraries.",
+          "Chapter 6 - 10": "Deep learning with TensorFlow and Keras.",
+          "Chapter 11 - 15": "Advanced techniques and best practices in machine learning."
+        },
+        "Important Pages": [
+          "Page 25-30: Introduction to Python for machine learning.",
+          "Page 150-155: Convolutional Neural Networks in TensorFlow.",
+          "Page 200-205: Handling Imbalanced datasets."
+        ]
+      },
+      {
+        "Name": "Deep Learning for Vision Systems",
+        "Author": "Mohamed Elgendy",
+        "URL": [
+          "https://www.amazon.com/Learning-Vision-Systems-Mohamed-Elgendy/dp/1617296198",
+          "https://books.google.com/books?id=6gkLzAEACAAJ&printsec=copyright"
+        ],
+        "Summary": "This book teaches the concepts and tools for building intelligent, scalable computer vision systems using deep learning.",
+        "Key Sections": {
+          "Chapter 1 - 3": "Overview of computer vision and deep learning.",
+          "Chapter 4 - 6": "Building scalable vision systems.",
+          "Chapter 7 - 9": "Applications and case studies."
+        },
+        "Important Pages": [
+          "Page 40-45: Implementing basic vision tasks.",
+          "Page 90-95: Optimizing deep learning models for vision.",
+          "Page 150-155: Case studies in computer vision systems."
+        ]
+      },
+      {
+        "Name": "Learning OpenCV 4",
+        "Author": "Adrian Kaehler",
+        "URL": [
+          "https://www.amazon.com/Learning-OpenCV-Computer-Vision-Library/dp/0596516134",
+          "https://www.oreilly.com/library/view/learning-opencv/9780596516130/"
+        ],
+        "Summary": "An introduction to computer vision using the OpenCV library, exploring its applications, and techniques.",
+        "Key Sections": {
+          "Chapter 1 - 4": "Introduction to OpenCV library.",
+          "Chapter 5 - 8": "Vision applications with OpenCV.",
+          "Chapter 9 - 12": "Advanced OpenCV techniques."
+        },
+        "Important Pages": [
+          "Page 10-15: Getting started with OpenCV.",
+          "Page 75-80: Image processing with OpenCV.",
+          "Page 110-115: Video analysis and processing."
+        ]
+      },
+      {
+        "Name": "Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow",
+        "Author": "Aurélien Géron",
+        "URL": [
+          "https://www.amazon.com/Hands-Machine-Learning-Scikit-Learn-TensorFlow/dp/1492032646",
+          "https://www.oreilly.com/library/view/hands-on-machine-learning/9781492032632/"
+        ],
+        "Summary": "This book provides practical techniques to build intelligent systems using Scikit-Learn, Keras, and TensorFlow.",
+        "Key Sections": {
+          "Chapter 1 - 2": "Fundamentals of machine learning and Python.",
+          "Chapter 3 - 5": "Deep learning with Keras.",
+          "Chapter 6 - 9": "End-to-end project examples in machine learning."
+        },
+        "Important Pages": [
+          "Page 20-25: Introduction to Scikit-Learn and Keras.",
+          "Page 100-105: Building neural networks with TensorFlow.",
+          "Page 200-205: Case studies."
+        ]
+      },
+      {
+        "Name": "Computer Vision: Algorithms and Applications",
+        "Author": "Richard Szeliski",
+        "URL": [
+          "https://szeliski.org/Book/",
+          "https://link.springer.com/book/10.1007/978-3-030-34372-9"
+        ],
+        "Summary": "This book gives a comprehensive overview of computer vision algorithms and applications, with a focus on practical solutions.",
+        "Key Sections": {
+          "Chapter 1 - 3": "Basic concepts in computer vision algorithms.",
+          "Chapter 4 - 7": "Applications of computer vision.",
+          "Chapter 8 - 10": "Advanced algorithms and techniques."
+        },
+        "Important Pages": [
+          "Page 30-35: Introduction to image processing.",
+          "Page 90-95: Feature detection and matching.",
+          "Page 150-155: 3D vision and depth estimation."
+        ]
+      }
+    ]
+  }
